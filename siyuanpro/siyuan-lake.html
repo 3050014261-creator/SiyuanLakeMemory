@@ -1,0 +1,1389 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>思源湖·四十年 | 上海交大131周年校庆</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --red: #C00000;
+    --red-dark: #8B0000;
+    --red-light: #E8000020;
+    --bg: #FAFAFA;
+    --bg-warm: #F5F0EB;
+    --text: #333333;
+    --text-light: #666666;
+    --text-muted: #999999;
+    --border: #E0D8D0;
+    --white: #FFFFFF;
+    --gold: #B8960C;
+    --pad: clamp(24px, 8vw, 160px);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Noto Sans SC', sans-serif;
+    color: var(--text);
+    background: var(--bg);
+    overflow-x: hidden;
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 clamp(20px, 5vw, 80px);
+    height: 60px;
+    background: rgba(250,250,250,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    transition: box-shadow .3s;
+  }
+  nav.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,.08); }
+  .nav-logo {
+    font-family: 'Noto Serif SC', serif;
+    font-weight: 700; font-size: 18px;
+    color: var(--red); letter-spacing: .05em;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .nav-logo::before {
+    content: '';
+    width: 20px; height: 20px;
+    background: var(--red);
+    clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
+    display: inline-block;
+  }
+  .nav-links { display: flex; gap: 8px; }
+  .nav-btn {
+    padding: 7px 18px;
+    border: 1.5px solid var(--border);
+    border-radius: 20px;
+    background: transparent;
+    font-family: 'Noto Sans SC', sans-serif;
+    font-size: 14px; color: var(--text);
+    cursor: pointer; transition: all .25s;
+  }
+  .nav-btn:hover, .nav-btn.active {
+    background: var(--red); border-color: var(--red);
+    color: #fff;
+  }
+
+  /* ─── HERO ─── */
+  #hero {
+    height: 100vh; min-height: 600px;
+    position: relative; display: flex;
+    align-items: center; justify-content: center;
+    overflow: hidden;
+  }
+  /* Simulated scenic lake bg using SVG pattern */
+  .hero-bg {
+  position: absolute; inset: 0;
+  background: url('images/hero.jpg') center center / cover no-repeat;
+  transition: background-image 0.5s ease-in-out;  /* ← 新增这行 */
+}
+.hero-bg::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(to bottom,
+    rgba(0,0,0,.55) 0%, rgba(0,0,0,.25) 40%, rgba(0,0,0,.5) 100%);
+}
+  .hero-content {
+    position: relative; z-index: 2;
+    text-align: center; color: #fff;
+    padding: 0 20px;
+    animation: heroIn 1.2s ease both;
+  }
+  @keyframes heroIn {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .hero-eyebrow {
+    font-size: clamp(12px, 2vw, 15px);
+    letter-spacing: .3em; text-transform: uppercase;
+    opacity: .75; margin-bottom: 16px;
+    font-weight: 300;
+  }
+  .hero-title {
+    font-family: 'Noto Serif SC', serif;
+    font-size: clamp(52px, 10vw, 112px);
+    font-weight: 900; letter-spacing: .05em;
+    line-height: 1; margin-bottom: 20px;
+    text-shadow: 0 4px 30px rgba(0,0,0,.4);
+  }
+  .hero-title span { color: #FF9999; }
+  .hero-subtitle {
+    font-size: clamp(13px, 2.5vw, 18px);
+    opacity: .85; margin-bottom: 40px;
+    font-weight: 300; letter-spacing: .1em;
+    max-width: 520px; margin-left: auto; margin-right: auto;
+    line-height: 1.8;
+  }
+  .hero-cta {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 14px 36px;
+    background: var(--red);
+    border: none; border-radius: 30px;
+    color: #fff; font-size: 16px; font-weight: 500;
+    cursor: pointer; transition: all .3s;
+    font-family: 'Noto Sans SC', sans-serif;
+    letter-spacing: .05em;
+    box-shadow: 0 8px 30px rgba(192,0,0,.4);
+  }
+  .hero-cta:hover {
+    background: var(--red-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 12px 40px rgba(192,0,0,.5);
+  }
+  .hero-cta svg { transition: transform .3s; }
+  .hero-cta:hover svg { transform: translateX(4px); }
+  .hero-scroll {
+    position: absolute; bottom: 32px; left: 50%; transform: translateX(-50%);
+    z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 8px;
+    color: rgba(255,255,255,.6); font-size: 11px; letter-spacing: .2em;
+    animation: bounce 2s infinite;
+  }
+  @keyframes bounce {
+    0%,100%{transform: translateX(-50%) translateY(0)}
+    50%{transform: translateX(-50%) translateY(8px)}
+  }
+
+  /* ─── SECTION COMMON ─── */
+  section { padding: 100px var(--pad); }
+  .section-label {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-size: 12px; letter-spacing: .3em; color: var(--red);
+    text-transform: uppercase; font-weight: 700; margin-bottom: 16px;
+  }
+  .section-label::before {
+    content: ''; width: 28px; height: 2px; background: var(--red);
+  }
+  h2.section-title {
+    font-family: 'Noto Serif SC', serif;
+    font-size: clamp(28px, 4vw, 48px);
+    font-weight: 700; color: var(--text);
+    line-height: 1.3; margin-bottom: 12px;
+  }
+
+  /* ─── TIMELINE ─── */
+  #timeline {
+    background: var(--bg);
+    padding-left: max(var(--pad), 80px);
+  }
+  .timeline-intro {
+    margin-bottom: 80px;
+  }
+  .timeline-wrapper {
+    display: flex; gap: 0;
+    position: relative;
+  }
+  /* Left axis */
+  .timeline-axis {
+    position: sticky; top: 80px;
+    width: 80px; min-width: 80px;
+    height: 100vh;
+    display: flex; flex-direction: column;
+    align-items: center;
+    padding-top: 20px;
+    align-self: flex-start;
+  }
+  .axis-line {
+    position: absolute; top: 0; bottom: 0;
+    width: 2px; background: var(--border);
+    left: 50%; transform: translateX(-50%);
+  }
+  .axis-dots {
+    position: absolute; top: 0; left: 0; right: 0;
+    display: flex; flex-direction: column;
+    align-items: center;
+    gap: 0;
+    height: 100%;
+    justify-content: space-around;
+    padding: 20px 0;
+  }
+  .axis-dot {
+    position: relative; z-index: 1;
+    width: 14px; height: 14px; border-radius: 50%;
+    background: var(--border); border: 2px solid var(--border);
+    transition: all .4s; cursor: default;
+  }
+  .axis-dot.active {
+    background: var(--red); border-color: var(--red);
+    box-shadow: 0 0 0 4px rgba(192,0,0,.15);
+    width: 18px; height: 18px;
+  }
+  .axis-dot::after {
+    content: attr(data-year);
+    position: absolute; right: calc(100% + 10px);
+    top: 50%; transform: translateY(-50%);
+    font-size: 11px; font-weight: 700; letter-spacing: .05em;
+    color: var(--text-muted); white-space: nowrap;
+    transition: color .4s;
+  }
+  .axis-dot.active::after { color: var(--red); }
+
+  /* Timeline content */
+  .timeline-content { flex: 1; padding-left: 40px; }
+  .tl-block {
+    padding: 60px 0 80px;
+    border-bottom: 1px solid var(--border);
+    opacity: .4; transform: translateX(20px);
+    transition: opacity .6s, transform .6s;
+  }
+  .tl-block:last-child { border-bottom: none; }
+  .tl-block.in-view { opacity: 1; transform: translateX(0); }
+  .tl-year {
+    font-family: 'Noto Serif SC', serif;
+    font-size: clamp(36px, 6vw, 72px);
+    font-weight: 900; color: var(--red);
+    opacity: .12; line-height: 1;
+    margin-bottom: -20px; position: relative; z-index: 0;
+    user-select: none;
+  }
+  .tl-title {
+    font-family: 'Noto Serif SC', serif;
+    font-size: clamp(20px, 3vw, 28px);
+    font-weight: 700; color: var(--text);
+    margin-bottom: 24px; position: relative; z-index: 1;
+  }
+  .tl-title span {
+    display: inline-block; padding: 2px 10px;
+    background: var(--red); color: #fff;
+    font-size: 14px; font-weight: 500;
+    border-radius: 3px; margin-right: 10px;
+    vertical-align: middle;
+  }
+  .tl-photos {
+    display: grid; grid-template-columns: 1.8fr 1fr;
+    gap: 16px; margin-bottom: 28px;
+  }
+  .tl-photo {
+    border-radius: 8px; overflow: hidden;
+    position: relative;
+  }
+  .tl-photo img {
+    width: 100%; height: 100%; object-fit: cover;
+    transition: transform .5s;
+  }
+  .tl-photo:hover img { transform: scale(1.05); }
+  /* Photo placeholders with descriptive overlays */
+  .tl-photo .ph {
+    width: 100%; height: 100%;
+    display: flex; align-items: center; justify-content: center;
+    flex-direction: column; gap: 8px;
+    color: rgba(255,255,255,.9); font-size: 13px; text-align: center;
+    padding: 12px;
+  }
+  .ph-icon { font-size: 32px; opacity: .7; }
+  .tl-text {
+    font-size: clamp(14px, 1.8vw, 16px);
+    line-height: 2; color: var(--text-light);
+    max-width: 580px;
+    border-left: 3px solid var(--red);
+    padding-left: 20px;
+  }
+  .tl-text em {
+    color: var(--red); font-style: normal; font-weight: 500;
+  }
+
+  /* Photo 1 - 1987 */
+  .ph-1987a { background: linear-gradient(135deg, #3a6e4a, #2a5a3a); }
+  .ph-1987b { background: linear-gradient(135deg, #4a5e3a, #3a4a2a); }
+  .ph-1996a { background: linear-gradient(135deg, #3a5a6e, #2a4a5a); }
+  .ph-1996b { background: linear-gradient(135deg, #4a6e5a, #3a5a4a); }
+
+  /* ─── SLIDER WIDGET ─── */
+  .tl-widget-wrap { max-width: 860px; margin-bottom: 28px; }
+  .widget-title {
+    font-size: 13px; color: var(--text-muted);
+    letter-spacing: .1em; margin-bottom: 12px;
+    text-transform: uppercase; font-weight: 500;
+  }
+  /* Slider widget */
+  .slider-widget {
+    border: 1px solid var(--border); border-radius: 12px; overflow: hidden;
+    background: #fff;
+  }
+  .slider-img-wrap {
+    position: relative; height: 420px; overflow: hidden;
+    background: #111;
+  }
+  .slider-img {
+    position: absolute; inset: 0; width: 100%; height: 100%;
+    object-fit: cover; opacity: 0; transition: opacity .4s;
+    display: flex; align-items: center; justify-content: center;
+    color: rgba(255,255,255,.8); font-size: 14px;
+  }
+  .slider-img.active { opacity: 1; }
+  .slider-img .ph {
+    width: 100%; height: 100%;
+    flex-direction: column; gap: 6px;
+  }
+  .slider-control {
+    padding: 16px 20px 20px;
+    border-top: 1px solid var(--border);
+  }
+  .slider-labels {
+    display: flex; justify-content: space-between;
+    font-size: 11px; color: var(--text-muted); margin-bottom: 8px;
+  }
+  .slider-caption {
+    font-size: 12px; color: var(--text-muted); margin-top: 8px;
+    text-align: center;
+  }input[type=range].drag-slider {
+  width: 100%; 
+  cursor: grab;
+  height: 28px;
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
+}
+input[type=range].drag-slider:active { cursor: grabbing; }
+
+input[type=range].drag-slider::-webkit-slider-runnable-track {
+  height: 4px;
+  background: linear-gradient(to right, var(--red), #ffaaaa);
+  border-radius: 2px;
+}
+
+input[type=range].drag-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 36px; height: 36px;
+  margin-top: -16px;
+  background: white;
+  border-radius: 50%;
+  box-shadow: 0 2px 8px rgba(0,0,0,.15);
+  cursor: grab;
+  background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 36 36'><text y='26' font-size='22'>🧪</text></svg>");
+  background-size: 28px 28px;
+  background-repeat: no-repeat;
+  background-position: center;
+  transition: transform 0.1s;
+}
+input[type=range].drag-slider::-webkit-slider-thumb:active {
+  transform: scale(1.2);
+  cursor: grabbing;
+}
+
+  /* Carousel widget */
+  .carousel-widget {
+    border: 1px solid var(--border); border-radius: 12px; overflow: hidden;
+    background: #fff; margin-top: 16px;
+  }
+  .carousel-img-wrap {
+    position: relative; height: 420px; overflow: hidden; background: #111;
+  }
+  .carousel-img {
+    position: absolute; inset: 0; width: 100%; height: 100%;
+    display: flex; align-items: center; justify-content: center;
+    object-fit: cover; opacity: 0;
+    transition: opacity .5s, transform .5s;
+    transform: translateX(30px);
+    color: rgba(255,255,255,.8); font-size: 14px;
+  }
+  .carousel-img.active {
+    opacity: 1; transform: translateX(0);
+  }
+  .carousel-img .ph {
+    width: 100%; height: 100%; flex-direction: column; gap: 6px;
+  }
+  .carousel-control {
+    padding: 14px 20px;
+    display: flex; align-items: center; justify-content: space-between;
+    border-top: 1px solid var(--border);
+  }
+  .car-info { font-size: 13px; color: var(--text-muted); }
+  .car-btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 9px 22px;
+    background: var(--red); border: none; border-radius: 20px;
+    color: #fff; font-size: 13px; font-weight: 500;
+    cursor: pointer; transition: all .25s;
+    font-family: 'Noto Sans SC', sans-serif;
+  }
+  .car-btn:hover { background: var(--red-dark); transform: scale(1.03); }
+  .carousel-dots {
+    display: flex; gap: 6px;
+  }
+  .carousel-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--border); transition: all .3s;
+  }
+  .carousel-dot.active { background: var(--red); width: 18px; border-radius: 3px; }
+
+  /* ─── PROJECT MAP ─── */
+  #projects {
+    background: var(--bg-warm);
+    padding: 80px var(--pad) 100px;
+  }
+  .project-header {
+    display: flex; align-items: flex-end; justify-content: space-between;
+    margin-bottom: 48px; flex-wrap: wrap; gap: 20px;
+  }
+  .project-hero-text {
+    font-family: 'Noto Serif SC', serif;
+    font-size: clamp(40px, 8vw, 96px);
+    font-weight: 900; color: var(--red);
+    line-height: .9; opacity: .12;
+    position: absolute; top: 0; left: var(--pad);
+    user-select: none; pointer-events: none;
+  }
+  .project-map-container {
+    position: relative; border-radius: 16px; overflow: hidden;
+    border: 1px solid var(--border);
+    box-shadow: 0 8px 40px rgba(0,0,0,.08);
+  }
+  /* Lake map background */
+  .lake-map-bg {
+    width: 100%; height: clamp(340px, 50vw, 540px);
+   background: url('images/map.jpg') center center / cover no-repeat;
+    position: relative; overflow: hidden;
+  }
+  /* Simulated lake shape */
+  .lake-shape {
+    position: absolute;
+    top: 20%; left: 15%; width: 68%; height: 55%;
+    background: linear-gradient(135deg, #64b5f6, #42a5f5, #1e88e5, #1565c0);
+    border-radius: 40% 60% 50% 70% / 50% 40% 60% 40%;
+    box-shadow: inset 0 10px 30px rgba(255,255,255,.2), 0 4px 20px rgba(21,101,192,.3);
+  }
+  .lake-shape::after {
+    content: '思源湖';
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+    font-family: 'Noto Serif SC', serif; font-size: clamp(16px,3vw,28px);
+    font-weight: 700; color: rgba(255,255,255,.9);
+    text-shadow: 0 2px 8px rgba(0,0,0,.3);
+    letter-spacing: .1em;
+  }
+  /* Walking path */
+  .lake-path {
+    position: absolute;
+    top: 17%; left: 12%; width: 74%; height: 62%;
+    border: 3px dashed rgba(255,255,255,.5);
+    border-radius: 45% 65% 55% 75% / 55% 45% 65% 45%;
+    pointer-events: none;
+  }
+  /* Trees */
+  .tree {
+    position: absolute; font-size: 20px; pointer-events: none; opacity: .8;
+  }
+  /* Project pins */
+  .proj-pin {
+    position: absolute; transform: translate(-50%, -100%);
+    cursor: pointer; transition: all .3s; z-index: 5;
+  }
+  .proj-pin:hover { transform: translate(-50%, -105%) scale(1.1); }
+  .proj-pin.selected .pin-dot {
+    background: var(--red); box-shadow: 0 0 0 6px rgba(192,0,0,.25);
+  }
+  .pin-dot {
+    width: 36px; height: 36px; border-radius: 50% 50% 50% 0;
+    background: var(--red); transform: rotate(-45deg);
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 4px 12px rgba(192,0,0,.4); transition: all .3s;
+  }
+  .pin-num {
+    transform: rotate(45deg);
+    font-size: 13px; font-weight: 700; color: #fff;
+  }
+  .pin-label {
+    position: absolute; bottom: -24px; left: 50%; transform: translateX(-50%);
+    white-space: nowrap; font-size: 11px; font-weight: 500;
+    background: rgba(255,255,255,.92); padding: 2px 8px; border-radius: 10px;
+    color: var(--text); border: 1px solid var(--border);
+    box-shadow: 0 2px 8px rgba(0,0,0,.1);
+  }
+  /* Selected project display */
+  .project-detail {
+    margin-top: 32px; border-radius: 12px;
+    overflow: hidden; border: 1px solid var(--border);
+    background: #fff; display: none;
+    box-shadow: 0 4px 20px rgba(0,0,0,.06);
+    position: relative;
+  }
+  .project-detail.visible { display: flex; }
+  .proj-detail-img {
+    width: 55%; min-height: 280px;
+    background: linear-gradient(135deg, #2e7d32, #1565c0);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    position: relative; overflow: hidden;
+  }
+  .proj-detail-img::after {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(to right, transparent 60%, rgba(255,255,255,.05) 100%);
+  }
+  .proj-detail-body {
+    flex: 1; padding: 32px;
+    display: flex; flex-direction: column; justify-content: space-between;
+  }
+  .proj-detail-num {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 64px; font-weight: 900; color: var(--red); opacity: .08;
+    line-height: 1; position: absolute; right: 24px; bottom: 16px;
+  }
+  .proj-detail-tag {
+    display: inline-block; padding: 3px 10px;
+    background: var(--red); color: #fff;
+    border-radius: 3px; font-size: 11px; font-weight: 700;
+    letter-spacing: .1em; margin-bottom: 12px;
+  }
+  .proj-detail-title {
+    font-family: 'Noto Serif SC', serif;
+    font-size: clamp(18px, 3vw, 26px); font-weight: 700;
+    margin-bottom: 12px;
+  }
+  .proj-detail-desc {
+    font-size: 14px; line-height: 1.9; color: var(--text-light);
+  }
+  .proj-exit {
+    position: absolute; top: 12px; right: 12px;
+    width: 28px; height: 28px; border-radius: 50%;
+    border: 1px solid var(--border); background: #fff;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; font-size: 14px; color: var(--text-muted);
+    z-index: 10; transition: all .2s;
+  }
+  .proj-exit:hover { background: var(--red); color: #fff; border-color: var(--red); }
+  .msg-link-btn {
+    display: inline-flex; align-items: center; gap: 6px;
+    margin-top: 16px; padding: 8px 18px;
+    border: 1.5px solid var(--red); border-radius: 20px;
+    color: var(--red); font-size: 13px; font-weight: 500;
+    cursor: pointer; transition: all .25s; background: transparent;
+    font-family: 'Noto Sans SC', sans-serif; text-decoration: none;
+    align-self: flex-start;
+  }
+  .msg-link-btn:hover { background: var(--red); color: #fff; }
+
+  /* ─── MESSAGES ─── */
+  #messages {
+    background: var(--bg);
+    padding: 80px var(--pad) 100px;
+  }
+  .msg-form-wrap {
+    max-width: 640px;
+    background: #fff; border: 1px solid var(--border);
+    border-radius: 16px; padding: 36px;
+    box-shadow: 0 4px 20px rgba(0,0,0,.05);
+    margin-bottom: 60px;
+  }
+  .msg-form-wrap h3 {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 20px; font-weight: 700; margin-bottom: 24px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .msg-form-wrap h3::before {
+    content: '💬'; font-size: 22px;
+  }
+  .form-row { margin-bottom: 16px; }
+  .form-row label {
+    display: block; font-size: 13px; font-weight: 500;
+    color: var(--text-light); margin-bottom: 6px;
+  }
+  .form-row input, .form-row textarea {
+    width: 100%; padding: 12px 16px;
+    border: 1.5px solid var(--border); border-radius: 8px;
+    font-family: 'Noto Sans SC', sans-serif; font-size: 14px;
+    color: var(--text); background: var(--bg);
+    transition: border-color .2s; outline: none;
+    resize: vertical;
+  }
+  .form-row input:focus, .form-row textarea:focus {
+    border-color: var(--red);
+  }
+  .form-row textarea { min-height: 100px; }
+  .submit-btn {
+    padding: 12px 32px;
+    background: var(--red); border: none; border-radius: 8px;
+    color: #fff; font-size: 15px; font-weight: 500;
+    cursor: pointer; transition: all .25s;
+    font-family: 'Noto Sans SC', sans-serif;
+  }
+  .submit-btn:hover { background: var(--red-dark); transform: translateY(-1px); }
+  /* Messages list */
+  .msg-list-header {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 24px; flex-wrap: wrap; gap: 12px;
+  }
+  .msg-count { font-size: 14px; color: var(--text-muted); }
+  .msg-item {
+    background: #fff; border: 1px solid var(--border);
+    border-radius: 12px; padding: 20px 24px;
+    margin-bottom: 12px;
+    animation: msgIn .3s ease;
+  }
+  @keyframes msgIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .msg-item-header {
+    display: flex; align-items: center; gap: 12px; margin-bottom: 10px;
+  }
+  .msg-avatar {
+    width: 36px; height: 36px; border-radius: 50%;
+    background: var(--red); display: flex; align-items: center; justify-content: center;
+    color: #fff; font-size: 14px; font-weight: 700; flex-shrink: 0;
+  }
+  .msg-meta { flex: 1; }
+  .msg-name { font-weight: 600; font-size: 14px; }
+  .msg-time { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
+  .msg-body { font-size: 14px; line-height: 1.8; color: var(--text-light); }
+  /* Pagination */
+  .pagination {
+    display: flex; gap: 8px; align-items: center;
+    justify-content: center; margin-top: 32px; flex-wrap: wrap;
+  }
+  .pg-btn {
+    width: 36px; height: 36px; border-radius: 8px;
+    border: 1.5px solid var(--border); background: #fff;
+    font-size: 14px; cursor: pointer; transition: all .2s;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--text);
+  }
+  .pg-btn:hover, .pg-btn.active {
+    background: var(--red); border-color: var(--red); color: #fff;
+  }
+  .pg-btn:disabled { opacity: .3; cursor: not-allowed; }
+  .no-msg {
+    text-align: center; padding: 60px 20px;
+    color: var(--text-muted); font-size: 15px;
+  }
+  .no-msg-icon { font-size: 48px; margin-bottom: 12px; }
+
+  /* ─── FOOTER ─── */
+  footer {
+    background: #1a1a1a; color: rgba(255,255,255,.7);
+    padding: 60px var(--pad);
+    text-align: center;
+  }
+  .footer-logo {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 20px; font-weight: 700; color: var(--red);
+    margin-bottom: 20px; letter-spacing: .1em;
+  }
+  .footer-quote {
+    font-family: 'Noto Serif SC', serif;
+    font-size: clamp(14px, 2.5vw, 18px);
+    color: rgba(255,255,255,.85); margin-bottom: 24px;
+    line-height: 1.8; letter-spacing: .05em;
+  }
+  .footer-copy {
+    font-size: 12px; opacity: .4;
+    border-top: 1px solid rgba(255,255,255,.1);
+    padding-top: 20px; margin-top: 20px;
+  }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 768px) {
+    :root { --pad: 20px; }
+    .tl-photos { grid-template-columns: 1fr; }
+    .timeline-axis { display: none; }
+    .timeline-content { padding-left: 0; }
+    .project-detail.visible { flex-direction: column; }
+    .proj-detail-img { width: 100%; min-height: 200px; }
+    .nav-logo span { display: none; }
+    .msg-form-wrap { padding: 24px; }
+  }
+  @media (max-width: 480px) {
+    .hero-title { font-size: 52px; }
+    .tl-year { font-size: 48px; }
+  }
+
+  /* ─── SECTION REVEAL ─── */
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s, transform .7s; }
+  .reveal.in { opacity: 1; transform: none; }
+
+  /* Decorative separator */
+  .section-sep {
+    width: 60px; height: 3px; background: var(--red);
+    margin: 16px 0 40px;
+  }
+</style>
+</head>
+<body>
+
+<!-- ─── NAV ─── -->
+<nav id="nav">
+  <div class="nav-logo">
+    <span>探索思源湖</span>
+  </div>
+  <div class="nav-links">
+    <button class="nav-btn" onclick="scrollToSection('#timeline')">思源湖</button>
+    <button class="nav-btn" onclick="scrollToSection('#projects')">项目导览</button>
+  </div>
+</nav>
+
+<!-- ─── HERO ─── -->
+<section id="hero">
+  <div class="hero-bg">
+  </div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">上海交通大学 · 闵行校园</div>
+    <div class="hero-title">思源湖<span>·</span>四十年</div>
+    <div class="hero-subtitle">上海交大131周年校庆<br>闵行校园思源湖记忆地图</div>
+  </div>
+  <div class="hero-scroll">
+    <span>向下滚动</span>
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+      <path d="M8 3v10M4 10l4 4 4-4" stroke="rgba(255,255,255,.6)" stroke-width="1.5" stroke-linecap="round"/>
+    </svg>
+  </div>
+</section>
+
+<!-- ─── TIMELINE ─── -->
+<section id="timeline">
+  <div class="timeline-intro reveal">
+    <div class="section-label">记忆地图</div>
+    <h2 class="section-title">思源湖历史变迁</h2>
+    <div class="section-sep"></div>
+  </div>
+
+  <div class="timeline-wrapper">
+    <!-- Sticky axis -->
+    <div class="timeline-axis" id="tlAxis">
+      <div class="axis-line"></div>
+      <div class="axis-dots">
+        <div class="axis-dot" id="dot-0" data-year="1987"></div>
+        <div class="axis-dot" id="dot-1" data-year="1996"></div>
+        <div class="axis-dot" id="dot-2" data-year="2023"></div>
+      </div>
+    </div>
+
+    <!-- Content -->
+    <div class="timeline-content">
+
+      <!-- 1987 -->
+    <div class="tl-block" id="tl-0">
+  <div class="tl-year">1987</div>
+  <div class="tl-title">
+    <span>1986–1987</span>挖湖开学
+  </div>
+  <div class="tl-photos">
+    <div style="border-radius:8px;overflow:hidden;border:1px solid #e0d8d0">
+      <img src="images/first.jpg" alt="1986年开湖之初" style="width:100%;display:block;height:380px;object-fit:cover">
+      <div style="background:#f5f0eb;padding:8px 12px">
+        <div style="font-size:13px;font-weight:600;color:#333">🌾 1986年·开湖之初</div>
+        <div style="font-size:12px;color:#999;margin-top:2px">芦苇丛生，阡陌纵横</div>
+      </div>
+    </div>
+    <div style="border-radius:8px;overflow:hidden;border:1px solid #e0d8d0">
+      <img src="images/start.jpg" alt="1987年校园启用" style="width:100%;display:block;height:380px;object-fit:cover">
+      <div style="background:#f5f0eb;padding:8px 12px">
+        <div style="font-size:13px;font-weight:600;color:#333">🏫 1987年·校园启用</div>
+        <div style="font-size:12px;color:#999;margin-top:2px">2600名新生首批报到</div>
+      </div>
+    </div>
+  </div>
+  <p class="tl-text">
+    1985年打桩，1986年开湖，<em>1987年首批2600名新生入住</em>，湖刚挖好，当时周围的芦苇比人还高，农民家的牛常来校园吃草。这就是思源湖的起点。
+  </p >
+</div>
+      <!-- 1996 -->
+    <div class="tl-block" id="tl-1">
+  <div class="tl-year">1996</div>
+  <div class="tl-title">
+    <span>1996</span>百年命名
+  </div>
+  <div class="tl-photos">
+    <div style="border-radius:8px;overflow:hidden;border:1px solid #e0d8d0">
+      <img src="images/name.jpg" alt="百年校庆命名" style="width:100%;display:block;height:300px;object-fit:cover">
+      <div style="background:#f5f0eb;padding:8px 12px">
+        <div style="font-size:13px;font-weight:600;color:#333">🎉 1996年·百年校庆</div>
+        <div style="font-size:12px;color:#999;margin-top:2px">正式命名思源湖</div>
+      </div>
+    </div>
+    <div style="border-radius:8px;overflow:hidden;border:1px solid #e0d8d0">
+      <img src="images/ani.jpg" alt="命名石碑" style="width:100%;display:block;height:300px;object-fit:cover">
+      <div style="background:#f5f0eb;padding:8px 12px">
+        <div style="font-size:13px;font-weight:600;color:#333">📜 饮水思源·命名石碑</div>
+        <div style="font-size:12px;color:#999;margin-top:2px">取自百年校训</div>
+      </div>
+    </div>
+  </div>
+  <p class="tl-text">
+    开湖十年一直叫"人工湖"，<em>百年校庆正式命名"思源湖"</em>，取自校训"饮水思源，爱国荣校"，十年无名，一朝有名。
+  </p >
+</div>
+
+      <!-- 2023 -->
+      <div class="tl-block" id="tl-2">
+        <div class="tl-year">2023</div>
+        <div class="tl-title">
+          <span>2019–2023</span>焕新·清如许
+        </div>
+
+        <!-- Slider widget -->
+        <div class="tl-widget-wrap">
+  <div class="widget-title">📸 拖拽滑块 · 见证生态蜕变</div>
+  <div class="slider-widget">
+    <div style="position:relative;height:420px;overflow:hidden;background:#111">
+      <img id="s0" src="images/19.jpg" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:1;transition:opacity .4s">
+      <img id="s1" src="images/20.jpg" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .4s">
+      <img id="s2" src="images/21.jpg" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .4s">
+      <img id="s3" src="images/23.jpg" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .4s">
+      <div id="sliderLabel" style="position:absolute;top:12px;left:12px;color:#fff;text-shadow:0 2px 6px rgba(0,0,0,.7)">
+        <div style="font-size:20px">🟤</div>
+        <div style="font-size:13px;font-weight:600;margin-top:4px">2019年前·劣V类水质</div>
+        <div style="font-size:11px;opacity:.85">水体浑浊，淤泥沉积</div>
+      </div>
+    </div>
+    <div class="slider-control">
+      <div class="slider-labels">
+        <span>2019年前</span><span>2020</span><span>2021</span><span>2023</span>
+      </div>
+      <input type="range" class="drag-slider" id="dragSlider" min="0" max="3" step="0.01" value="0">
+      <div class="slider-caption" id="sliderCaption">◀ 拖动滑块，见证思源湖的蜕变 ▶</div>
+    </div>
+  </div>
+
+          <!-- Carousel -->
+          <div class="widget-title" style="margin-top:24px">🔄 点击按钮 · 轮播四季景色</div>
+          <div class="carousel-widget">
+         <div class="carousel-img-wrap">
+  <div class="carousel-img active" id="cimg-0">
+    <img src="images/spring1.jpg" style="width:100%;height:100%;object-fit:cover;display:block">
+    <div style="position:absolute;top:16px;left:16px;color:#fff;text-shadow:0 2px 8px rgba(0,0,0,.5)">
+      <div style="font-size:24px">🌸</div>
+      <div style="font-size:14px;font-weight:600;margin-top:4px">春·樱花绕湖</div>
+      <div style="font-size:12px;opacity:.85">桃花盛开，倒影如画</div>
+    </div>
+  </div>
+  <div class="carousel-img" id="cimg-1">
+    <img src="images/spring2.jpg" style="width:100%;height:100%;object-fit:cover;display:block">
+    <div style="position:absolute;top:16px;left:16px;color:#fff;text-shadow:0 2px 8px rgba(0,0,0,.5)">
+      <div style="font-size:24px">🌸</div>
+      <div style="font-size:14px;font-weight:600;margin-top:4px">春·樱花绕湖</div>
+      <div style="font-size:12px;opacity:.85">桃花盛开，倒影如画</div>
+    </div>
+  </div>
+  <div class="carousel-img" id="cimg-2">
+    <img src="images/summer1.jpg" style="width:100%;height:100%;object-fit:cover;display:block">
+    <div style="position:absolute;top:16px;left:16px;color:#fff;text-shadow:0 2px 8px rgba(0,0,0,.5)">
+      <div style="font-size:24px">🌿</div>
+      <div style="font-size:14px;font-weight:600;margin-top:4px">夏·碧波荡漾</div>
+      <div style="font-size:12px;opacity:.85">柳树摇曳，绿林成荫</div>
+    </div>
+  </div>
+  <div class="carousel-img" id="cimg-3">
+    <img src="images/summer2.jpg" style="width:100%;height:100%;object-fit:cover;display:block">
+    <div style="position:absolute;top:16px;left:16px;color:#fff;text-shadow:0 2px 8px rgba(0,0,0,.5)">
+      <div style="font-size:24px">🌿</div>
+      <div style="font-size:14px;font-weight:600;margin-top:4px">夏·碧波荡漾</div>
+      <div style="font-size:12px;opacity:.85">柳树摇曳，绿林成荫</div>
+    </div>
+  </div>
+  <div class="carousel-img" id="cimg-4">
+    <img src="images/autumn1.jpg" style="width:100%;height:100%;object-fit:cover;display:block">
+    <div style="position:absolute;top:16px;left:16px;color:#fff;text-shadow:0 2px 8px rgba(0,0,0,.5)">
+      <div style="font-size:24px">🍂</div>
+      <div style="font-size:14px;font-weight:600;margin-top:4px">秋·金叶落湖</div>
+      <div style="font-size:12px;opacity:.85">叠翠流金，层林尽染</div>
+    </div>
+  </div>
+  <div class="carousel-img" id="cimg-5">
+    <img src="images/autumn2.jpg" style="width:100%;height:100%;object-fit:cover;display:block">
+    <div style="position:absolute;top:16px;left:16px;color:#fff;text-shadow:0 2px 8px rgba(0,0,0,.5)">
+      <div style="font-size:24px">🍂</div>
+      <div style="font-size:14px;font-weight:600;margin-top:4px">秋·金叶落湖</div>
+      <div style="font-size:12px;opacity:.85">叠翠流金，层林尽染</div>
+    </div>
+  </div>
+  <div class="carousel-img" id="cimg-6">
+    <img src="images/winter1.jpg" style="width:100%;height:100%;object-fit:cover;display:block">
+    <div style="position:absolute;top:16px;left:16px;color:#fff;text-shadow:0 2px 8px rgba(0,0,0,.5)">
+      <div style="font-size:24px">❄️</div>
+      <div style="font-size:14px;font-weight:600;margin-top:4px">冬·银装素裹</div>
+      <div style="font-size:12px;opacity:.85">清寒袭人，静谧悠远</div>
+    </div>
+  </div>
+  <div class="carousel-img" id="cimg-7">
+    <img src="images/winter2.jpg" style="width:100%;height:100%;object-fit:cover;display:block">
+    <div style="position:absolute;top:16px;left:16px;color:#fff;text-shadow:0 2px 8px rgba(0,0,0,.5)">
+      <div style="font-size:24px">❄️</div>
+      <div style="font-size:14px;font-weight:600;margin-top:4px">冬·银装素裹</div>
+      <div style="font-size:12px;opacity:.85">清寒袭人，静谧悠远</div>
+    </div>
+  </div>
+</div>
+            </div>
+            <div class="carousel-control">
+              <div class="carousel-dots">
+                <div class="carousel-dot active" id="cdot-0"></div>
+<div class="carousel-dot" id="cdot-1"></div>
+<div class="carousel-dot" id="cdot-2"></div>
+<div class="carousel-dot" id="cdot-3"></div>
+<div class="carousel-dot" id="cdot-4"></div>
+<div class="carousel-dot" id="cdot-5"></div>
+<div class="carousel-dot" id="cdot-6"></div>
+<div class="carousel-dot" id="cdot-7"></div>
+              <div class="car-info" id="carInfo">春 · 第1/2张</div>
+              <button class="car-btn" id="carBtn" onclick="nextCarousel()">
+                下一张
+                <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+                  <path d="M6 3l5 5-5 5" stroke="white" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <p class="tl-text">
+          2019年，思源湖启动水生态修复，<em>水质从劣V类升至III类</em>，清澈见底，水下森林初现，水鸟鱼类明显增多。2023年近<em>600米环湖步道</em>建成，水清岸绿。思源湖，40岁正年轻。
+        </p>
+      </div>
+
+    </div><!-- end timeline-content -->
+  </div><!-- end timeline-wrapper -->
+</section>
+
+<!-- ─── PROJECTS ─── -->
+<section id="projects">
+  <div style="position:relative;margin-bottom:0">
+    <div class="project-hero-text">2027<br>再焕新</div>
+  </div>
+  <div class="reveal" style="margin-bottom:40px;position:relative;z-index:1">
+    <div class="section-label">同学项目导览</div>
+    <h2 class="section-title">2027·再焕新</h2>
+    <div class="section-sep"></div>
+    <p style="color:var(--text-light);font-size:15px;max-width:480px;line-height:1.8">点击地图上的项目标记，了解同学们为思源湖设计的创新方案。</p>
+  </div>
+
+  <div class="project-map-container reveal">
+    <div class="lake-map-bg" id="lakeMap">
+      <!-- Project pins -->
+      <div class="proj-pin" style="left:22%;top:30%" id="pin-1" onclick="selectProject(1)">
+        <div class="pin-dot"><div class="pin-num">1</div></div>
+        <div class="pin-label">智慧观测站</div>
+      </div>
+      <div class="proj-pin" style="left:48%;top:18%" id="pin-2" onclick="selectProject(2)">
+        <div class="pin-dot"><div class="pin-num">2</div></div>
+        <div class="pin-label">生态浮岛</div>
+      </div>
+      <div class="proj-pin" style="left:75%;top:32%" id="pin-3" onclick="selectProject(3)">
+        <div class="pin-dot"><div class="pin-num">3</div></div>
+        <div class="pin-label">记忆廊道</div>
+      </div>
+      <div class="proj-pin" style="left:45%;top:64%" id="pin-4" onclick="selectProject(4)">
+        <div class="pin-dot"><div class="pin-num">4</div></div>
+        <div class="pin-label">怀源</div>
+      </div>
+      <div class="proj-pin" style="left:62%;top:68%" id="pin-5" onclick="selectProject(5)">
+        <div class="pin-dot"><div class="pin-num">5</div></div>
+        <div class="pin-label">人与思源湖</div>
+      </div>
+      <div class="proj-pin" style="left:85%;top:60%" id="pin-6" onclick="selectProject(6)">
+        <div class="pin-dot"><div class="pin-num">6</div></div>
+        <div class="pin-label">湿地科普园</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Project detail panel -->
+  <div class="project-detail" id="projectDetail">
+    <div class="proj-exit" id="projExit" onclick="closeProject()">✕</div>
+    <div class="proj-detail-img" id="projImg">
+      <div class="ph" id="projImgInner" style="width:100%;height:100%;flex-direction:column;gap:8px;color:rgba(255,255,255,.9)">
+      </div>
+    </div>
+    <div class="proj-detail-body">
+      <div>
+        <div class="proj-detail-tag" id="projTag"></div>
+        <div class="proj-detail-title" id="projTitle"></div>
+        <div class="proj-detail-desc" id="projDesc"></div>
+        <div id="projMsgBtn"></div>
+      </div>
+      <div class="proj-detail-num" id="projNum"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── MESSAGES ─── -->
+<section id="messages">
+  <div class="reveal">
+    <div class="section-label">留言板</div>
+    <h2 class="section-title">寄语思源湖</h2>
+    <div class="section-sep"></div>
+  </div>
+
+  <div class="msg-form-wrap reveal">
+    <h3>写下你与思源湖的故事</h3>
+    <div class="form-row">
+      <label>你的昵称</label>
+      <input type="text" id="msgNick" placeholder="交大人·2027" maxlength="20">
+      <div class="form-row">
+  <label>选择你的头像</label>
+  <div id="avatarPicker" style="display:flex;flex-wrap:wrap;gap:8px;margin-top:4px"></div>
+</div>
+    </div>
+    <div class="form-row">
+      <label>留言内容</label>
+      <textarea id="msgBody" placeholder="在这里写下你与思源湖的记忆、感受或期望……" maxlength="300"></textarea>
+    </div>
+    <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap">
+      <button class="submit-btn" onclick="submitMsg()">提交留言</button>
+      <span id="msgTip" style="font-size:13px;color:var(--red);display:none">请填写昵称和留言内容</span>
+    </div>
+  </div>
+
+  <div class="reveal">
+    <div class="msg-list-header">
+      <h3 style="font-family:'Noto Serif SC',serif;font-size:20px;font-weight:700">所有留言</h3>
+      <span class="msg-count" id="msgCount"></span>
+    </div>
+    <div id="msgList"></div>
+    <div class="pagination" id="pgBar"></div>
+  </div>
+</section>
+
+<!-- ─── FOOTER ─── -->
+<footer>
+  <div class="footer-logo">探索思源湖 · 上海交大131周年</div>
+  <div class="footer-quote">
+    "从无到有，从荒到美。<br>思源湖和交大，一起走过40年。"
+  </div>
+  <div class="footer-copy">
+    © 2026 上海交通大学 · 闵行校园思源湖记忆地图<br>
+    饮水思源，爱国荣校
+  </div>
+</footer>
+
+<script>
+  // ─── HERO SLIDESHOW ───
+const heroBg = document.querySelector('.hero-bg');
+const heroImages = [
+  "url('images/hero.jpg')",
+  "url('images/hero2.jpg')",
+  "url('images/hero3.jpg')"
+];
+let heroIdx = 0;
+setInterval(() => {
+  heroIdx = (heroIdx + 1) % heroImages.length;
+  heroBg.style.backgroundImage = heroImages[heroIdx];
+  heroBg.style.backgroundSize = 'cover';
+  heroBg.style.backgroundPosition = 'center center';
+}, 4000);
+// ─── NAV SCROLL ───
+function scrollToSection(id) {
+  document.querySelector(id).scrollIntoView({ behavior: 'smooth' });
+}
+window.addEventListener('scroll', () => {
+  document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 20);
+});
+
+// ─── REVEAL ON SCROLL ───
+const revealObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); } });
+}, { threshold: 0.12 });
+document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+
+// ─── TIMELINE DOT ACTIVE ───
+const tlBlocks = [
+  document.getElementById('tl-0'),
+  document.getElementById('tl-1'),
+  document.getElementById('tl-2')
+];
+const dots = [
+  document.getElementById('dot-0'),
+  document.getElementById('dot-1'),
+  document.getElementById('dot-2')
+];
+const tlObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    const idx = tlBlocks.indexOf(e.target);
+    if (idx === -1) return;
+    if (e.isIntersecting) {
+      e.target.classList.add('in-view');
+      dots.forEach((d,i) => d.classList.toggle('active', i === idx));
+    }
+  });
+}, { threshold: 0.3 });
+tlBlocks.forEach(b => tlObs.observe(b));
+
+// ─── DRAG SLIDER ───
+const dragSlider = document.getElementById('dragSlider');
+const sliderCaptions = [
+  '2019年前 · 劣V类水质，水体浑浊',
+  '2020年 · 生态修复启动，水草种植',
+  '2021年 · 水下森林初现，水质升至IV类',
+  '2023年 · 水清岸绿，III类，环湖步道建成'
+];
+const sliderLabels = [
+  {icon:'🟤', title:'2019年前·劣V类水质', sub:'水体浑浊，淤泥沉积'},
+  {icon:'🌿', title:'2020年·生态修复启动', sub:'水草种植，水质恢复'},
+  {icon:'🐟', title:'2021年·水下森林初现', sub:'水质升至IV类，鱼类增多'},
+  {icon:'✨', title:'2023年·清澈见底·III类', sub:'环湖绿化步道建成，水鸟翔集'}
+];
+document.getElementById('dragSlider').addEventListener('input', function() {
+  const val = Math.round(parseFloat(this.value));
+  [0,1,2,3].forEach(i => {
+    document.getElementById('s'+i).style.opacity = (i === val) ? '1' : '0';
+  });
+  const l = sliderLabels[val];
+  document.getElementById('sliderLabel').innerHTML =
+    `<div style="font-size:20px">${l.icon}</div>
+     <div style="font-size:13px;font-weight:600;margin-top:4px">${l.title}</div>
+     <div style="font-size:11px;opacity:.85">${l.sub}</div>`;
+  document.getElementById('sliderCaption').textContent = l.title;
+});
+
+// ─── CAROUSEL ───
+// 季节分组：每组2张
+const seasons = [
+  { name: '春', imgs: [0, 1] },
+  { name: '夏', imgs: [2, 3] },
+  { name: '秋', imgs: [4, 5] },
+  { name: '冬', imgs: [6, 7] }
+];
+let seasonIdx = 0;    // 当前季节
+let frameIdx = 0;     // 季节内第几张(0或1)
+let carIdx = 0;       // 全局图片索引
+
+// 自动在同季节两张间切换
+let carTimer = setInterval(() => {
+  document.getElementById('cdot-' + carIdx).classList.remove('active');
+  document.getElementById('cimg-' + carIdx).classList.remove('active');
+  frameIdx = (frameIdx + 1) % 2;
+  carIdx = seasons[seasonIdx].imgs[frameIdx];
+  document.getElementById('cimg-' + carIdx).classList.add('active');
+  document.getElementById('cdot-' + carIdx).classList.add('active');
+  document.getElementById('carInfo').textContent =
+    seasons[seasonIdx].name + ' · 第' + (frameIdx + 1) + '/2张';
+}, 3000);
+
+function nextCarousel() {
+  // 点击跳到下一季节第一张
+  document.getElementById('cdot-' + carIdx).classList.remove('active');
+  document.getElementById('cimg-' + carIdx).classList.remove('active');
+  seasonIdx = (seasonIdx + 1) % 4;
+  frameIdx = 0;
+  carIdx = seasons[seasonIdx].imgs[0];
+  document.getElementById('cimg-' + carIdx).classList.add('active');
+  document.getElementById('cdot-' + carIdx).classList.add('active');
+  document.getElementById('carInfo').textContent =
+    seasons[seasonIdx].name + ' · 第1/2张';
+  // 重置计时器
+  clearInterval(carTimer);
+  carTimer = setInterval(() => {
+    document.getElementById('cdot-' + carIdx).classList.remove('active');
+    document.getElementById('cimg-' + carIdx).classList.remove('active');
+    frameIdx = (frameIdx + 1) % 2;
+    carIdx = seasons[seasonIdx].imgs[frameIdx];
+    document.getElementById('cimg-' + carIdx).classList.add('active');
+    document.getElementById('cdot-' + carIdx).classList.add('active');
+    document.getElementById('carInfo').textContent =
+      seasons[seasonIdx].name + ' · 第' + (frameIdx + 1) + '/2张';
+  }, 3000);
+}
+// ─── PROJECTS ───
+const projects = {
+  1: {
+    icon: '🔭', tag: '项目一', title: '智慧观测站',
+    img:'images/1.jpg',
+    desc: '在思源湖北岸设立智慧生态观测站，集成水质传感器、气象监测仪及AI摄像系统，实时监测湖区水质、鸟类活动和植被状态，数据公开展示，让每位交大人都能了解思源湖的生命体征。',
+    bg: 'linear-gradient(135deg,#0d47a1,#1565c0,#1976d2)', msgBtn: false
+  },
+  2: {
+    icon: '🌿', tag: '项目二', title: '生态浮岛',
+    desc: '设计并投放多座仿自然生态浮岛，种植本土水生植物，为鱼类产卵、水鸟栖息提供天然庇护所。浮岛采用可降解环保材料，形成"会呼吸的湖心花园"。',
+    bg: 'linear-gradient(135deg,#1b5e20,#2e7d32,#388e3c)', msgBtn: false
+  },
+  3: {
+    icon: '🏛️', tag: '项目三', title: '记忆廊道',
+    img:'images/3.jpg',
+    desc: '沿环湖步道设置"思源湖记忆廊道"，通过铭刻于地面和廊柱的历史影像与文字，串联1986年至今的关键时刻，让每一步行走都成为穿越40年的时光旅途。',
+    bg: 'linear-gradient(135deg,#4a148c,#6a1b9a,#7b1fa2)', msgBtn: false
+  },
+  4: {
+    icon: '✨', tag: '项目四', title: '怀源———湖畔互动直饮装置',
+    img:'images/4.jpg',
+    desc: '设计以“湖水、光波、直饮水”作为核心媒介，将校训“饮水思源”从文字性的精神表达转化为可参与、可使用的校园日常行为。装置通过流动的光影回应“万物流变”的哲学观念，三组波峰象征学校发展的过去、现在与未来；末端嵌入小型直饮水功能，使学生在湖边饮水、补水、停留和互动的过程中，自然感知“由水及源、由当下回望历史”的意义。',
+    bg: 'linear-gradient(135deg,#1a237e,#283593,#3949ab)', msgBtn: false
+  },
+  5: {
+    icon: '🎨', tag: '项目五', title: '共绘思源墙',
+    img:'images/5.jpg',
+    desc: '在思源湖南岸设立"共绘思源墙"，每位同学均可在墙上留下自己的创作——绘画、诗句或祝福。40周年之际，这堵墙将成为全体交大人共同的艺术作品与集体记忆。',
+    bg: 'linear-gradient(135deg,#880e4f,#ad1457,#c2185b)', msgBtn: true
+  },
+  6: {
+    icon: '🦋', tag: '项目六', title: '湿地科普园',
+    img:'images/6.jpg', 
+    desc: '在思源湖东岸开辟湿地科普体验园，还原湿地生态系统，设置互动科普展牌、观鸟亭和自然教育径，为学生提供身临其境的自然教育场所，让生态文明教育落地生根。',
+    bg: 'linear-gradient(135deg,#004d40,#00695c,#00796b)', msgBtn: false
+  }
+};
+
+function selectProject(n) {
+  document.querySelectorAll('.proj-pin').forEach(p => p.classList.remove('selected'));
+  document.getElementById('pin-' + n).classList.add('selected');
+  const p = projects[n];
+  document.getElementById('projTag').textContent = p.tag;
+  document.getElementById('projTitle').textContent = p.title;
+  document.getElementById('projDesc').textContent = p.desc;
+ const imgEl = document.getElementById('projImg');
+if (p.img) {
+  imgEl.style.background = `url('${p.img}') center/cover no-repeat`;
+} else {
+  imgEl.style.background = p.bg;
+}
+  document.getElementById('projNum').textContent = n;
+  const btnWrap = document.getElementById('projMsgBtn');
+  if (p.msgBtn) {
+    btnWrap.innerHTML = '<a class="msg-link-btn" onclick="scrollToSection(\'#messages\')" href="javascript:void(0)">💬 前往留言区，分享你的想法</a>';
+  } else {
+    btnWrap.innerHTML = '';
+  }
+  const detail = document.getElementById('projectDetail');
+  detail.classList.add('visible');
+  setTimeout(() => detail.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 100);
+}
+
+function closeProject() {
+  document.getElementById('projectDetail').classList.remove('visible');
+  document.querySelectorAll('.proj-pin').forEach(p => p.classList.remove('selected'));
+}
+
+// ─── MESSAGES (localStorage) ───
+const PER_PAGE = 5;
+let currentPage = 1;
+
+function getMessages() {
+  try {
+    return JSON.parse(localStorage.getItem('siyuan_msgs') || '[]');
+  } catch(e) { return []; }
+}
+function saveMessages(msgs) {
+  localStorage.setItem('siyuan_msgs', JSON.stringify(msgs));
+}
+
+function formatTime(ts) {
+  const d = new Date(ts);
+  return d.getFullYear() + '年' + (d.getMonth()+1) + '月' + d.getDate() + '日 '
+    + String(d.getHours()).padStart(2,'0') + ':' + String(d.getMinutes()).padStart(2,'0');
+}
+
+function renderMessages(page) {
+  const msgs = getMessages();
+  const total = msgs.length;
+  currentPage = page;
+  document.getElementById('msgCount').textContent = total ? `共 ${total} 条留言` : '';
+  const list = document.getElementById('msgList');
+  if (!total) {
+    list.innerHTML = '<div class="no-msg"><div class="no-msg-icon">🏞️</div><div>还没有留言，来第一个留言吧！</div></div>';
+    document.getElementById('pgBar').innerHTML = '';
+    return;
+  }
+  const start = (page - 1) * PER_PAGE;
+  const slice = msgs.slice(start, start + PER_PAGE);
+  list.innerHTML = slice.map(m => `
+    <div class="msg-item">
+      <div class="msg-item-header">
+        <div class="msg-avatar" style="background:${m.avatarColor||'var(--red)'};border:1px solid #ddd;font-size:18px">${m.avatarEmoji||m.nick[0]}</div>
+        <div class="msg-meta">
+          <div class="msg-name">${escHtml(m.nick)}</div>
+          <div class="msg-time">${formatTime(m.ts)}</div>
+        </div>
+      </div>
+      <div class="msg-body">${escHtml(m.body)}</div>
+    </div>
+  `).join('');
+  // Pagination
+  const totalPages = Math.ceil(total / PER_PAGE);
+  if (totalPages <= 1) { document.getElementById('pgBar').innerHTML = ''; return; }
+  let pgHtml = '';
+  for (let i = 1; i <= totalPages; i++) {
+    pgHtml += `<button class="pg-btn${i===page?' active':''}" onclick="renderMessages(${i})">${i}</button>`;
+  }
+  document.getElementById('pgBar').innerHTML = pgHtml;
+}
+
+function escHtml(s) {
+  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+function submitMsg() {
+  const nick = document.getElementById('msgNick').value.trim();
+  const body = document.getElementById('msgBody').value.trim();
+  const tip = document.getElementById('msgTip');
+  if (!nick || !body) { tip.style.display='inline'; setTimeout(()=>tip.style.display='none',2500); return; }
+  const msgs = getMessages();
+  msgs.unshift({ nick, body, ts: Date.now(), avatarColor: selectedAvatar.color, avatarEmoji: selectedAvatar.emoji });
+  saveMessages(msgs);
+  document.getElementById('msgNick').value = '';
+  document.getElementById('msgBody').value = '';
+  renderMessages(1);
+  // Scroll to list
+  document.getElementById('msgList').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+// Seed some example messages if empty
+renderMessages(1);
+const avatarColors = ['#ffffff','#222222','#C00000','#f0c040','#1565c0','#2e7d32','#6a1b9a'];
+const avatarEmojis = ['🐱','🐶','🐷','🐵','🦋','🐻','🦊','🐨','🐰','🐮','🐭'];
+let selectedAvatar = { color: '#C00000', emoji: '🐱' };
+function buildAvatarPicker() {
+  const wrap = document.getElementById('avatarPicker');
+  if (!wrap) return;
+  wrap.innerHTML = `
+    <div style="margin-bottom:10px">
+      <div style="font-size:12px;color:#999;margin-bottom:6px">选动物</div>
+      <div id="emojiRow" style="display:flex;gap:6px;flex-wrap:nowrap"></div>
+    </div>
+    <div>
+      <div style="font-size:12px;color:#999;margin-bottom:6px">选颜色</div>
+      <div id="colorRow" style="display:flex;gap:6px"></div>
+    </div>
+    <div style="margin-top:10px;display:flex;align-items:center;gap:10px">
+      <div id="avatarPreview" style="width:40px;height:40px;border-radius:50%;background:#C00000;display:flex;align-items:center;justify-content:center;font-size:22px;border:2px solid #ddd">🐱</div>
+      <span style="font-size:13px;color:#666">预览效果</span>
+    </div>
+  `;
+
+  function updatePreview() {
+    const p = document.getElementById('avatarPreview');
+    p.style.background = selectedAvatar.color;
+    p.style.border = selectedAvatar.color === '#ffffff' ? '2px solid #ccc' : '2px solid ' + selectedAvatar.color;
+    p.textContent = selectedAvatar.emoji;
+  }
+
+  // 动物排
+  const emojiRow = document.getElementById('emojiRow');
+  avatarEmojis.forEach(emoji => {
+    const btn = document.createElement('button');
+    btn.style.cssText = 'width:36px;height:36px;border-radius:50%;background:#f0f0f0;border:2px solid #ddd;font-size:20px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;transition:all .2s;flex-shrink:0';
+    btn.textContent = emoji;
+    btn.onclick = () => {
+      selectedAvatar.emoji = emoji;
+      emojiRow.querySelectorAll('button').forEach(b => { b.style.transform='scale(1)'; b.style.borderColor='#ddd'; });
+      btn.style.transform = 'scale(1.25)';
+      btn.style.borderColor = 'var(--red)';
+      updatePreview();
+    };
+    emojiRow.appendChild(btn);
+  });
+  emojiRow.querySelector('button').style.borderColor = 'var(--red)';
+  emojiRow.querySelector('button').style.transform = 'scale(1.25)';
+
+  // 颜色排
+  const colorRow = document.getElementById('colorRow');
+  avatarColors.forEach(color => {
+    const btn = document.createElement('button');
+    btn.style.cssText = `width:30px;height:30px;border-radius:50%;background:${color};border:2px solid ${color==='#ffffff'?'#ccc':color};cursor:pointer;transition:all .2s;flex-shrink:0`;
+    btn.onclick = () => {
+      selectedAvatar.color = color;
+      colorRow.querySelectorAll('button').forEach(b => b.style.boxShadow='none');
+      btn.style.boxShadow = '0 0 0 3px var(--red)';
+      updatePreview();
+    };
+    colorRow.appendChild(btn);
+  });
+  colorRow.querySelectorAll('button')[2].style.boxShadow = '0 0 0 3px var(--red)';
+}
+buildAvatarPicker();
+</script>
+</body>
+</html>
