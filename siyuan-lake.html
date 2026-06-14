@@ -955,29 +955,29 @@ input[type=range].drag-slider::-webkit-slider-thumb:active {
   <div class="project-map-container reveal">
     <div class="lake-map-bg" id="lakeMap">
       <!-- Project pins -->
-      <div class="proj-pin" style="left:22%;top:30%" id="pin-1" onclick="selectProject(1)">
+      <div class="proj-pin" style="left:20%;top:39%" id="pin-1" onclick="selectProject(1)">
         <div class="pin-dot"><div class="pin-num">1</div></div>
-        <div class="pin-label">智慧观测站</div>
+        <div class="pin-label">思源履光</div>
       </div>
-      <div class="proj-pin" style="left:48%;top:18%" id="pin-2" onclick="selectProject(2)">
+      <div class="proj-pin" style="left:96%;top:93%" id="pin-2" onclick="selectProject(2)">
         <div class="pin-dot"><div class="pin-num">2</div></div>
-        <div class="pin-label">生态浮岛</div>
+        <div class="pin-label">鸽子棚</div>
       </div>
-      <div class="proj-pin" style="left:75%;top:32%" id="pin-3" onclick="selectProject(3)">
+      <div class="proj-pin" style="left:78%;top:56%" id="pin-3" onclick="selectProject(3)">
         <div class="pin-dot"><div class="pin-num">3</div></div>
-        <div class="pin-label">记忆廊道</div>
+        <div class="pin-label">131座椅</div>
       </div>
-      <div class="proj-pin" style="left:45%;top:64%" id="pin-4" onclick="selectProject(4)">
+      <div class="proj-pin" style="left:46.5%;top:64%" id="pin-4" onclick="selectProject(4)">
         <div class="pin-dot"><div class="pin-num">4</div></div>
         <div class="pin-label">怀源</div>
       </div>
-      <div class="proj-pin" style="left:62%;top:68%" id="pin-5" onclick="selectProject(5)">
+      <div class="proj-pin" style="left:28%;top:26%" id="pin-5" onclick="selectProject(5)">
         <div class="pin-dot"><div class="pin-num">5</div></div>
-        <div class="pin-label">人与思源湖</div>
+        <div class="pin-label">思源回声</div>
       </div>
-      <div class="proj-pin" style="left:85%;top:60%" id="pin-6" onclick="selectProject(6)">
+      <div class="proj-pin" style="left:41%;top:61%" id="pin-6" onclick="selectProject(6)">
         <div class="pin-dot"><div class="pin-num">6</div></div>
-        <div class="pin-label">湿地科普园</div>
+        <div class="pin-label">月亮椅</div>
       </div>
     </div>
   </div>
@@ -1181,20 +1181,21 @@ function nextCarousel() {
 // ─── PROJECTS ───
 const projects = {
   1: {
-    icon: '🔭', tag: '项目一', title: '智慧观测站',
+    icon: '🔭', tag: '项目一', title: '思源履光',
     img:'images/1.jpg',
-    desc: '在思源湖北岸设立智慧生态观测站，集成水质传感器、气象监测仪及AI摄像系统，实时监测湖区水质、鸟类活动和植被状态，数据公开展示，让每位交大人都能了解思源湖的生命体征。',
+    desc: '设计以光影互动诠释饮水思源的初心本源,当行人踏足桥面，压力板四周即刻亮起暖黄柔光，温润的光影象征交大百年文脉星火与育人微光。光影随步履启停而生灭，寓意学子成长离不开母校培育、前辈积淀与时代滋养，桥侧智能屏幕与桥面光影同步点亮，完成从回望初心到奔赴使命的精神递进。',
     bg: 'linear-gradient(135deg,#0d47a1,#1565c0,#1976d2)', msgBtn: false
   },
   2: {
-    icon: '🌿', tag: '项目二', title: '生态浮岛',
-    desc: '设计并投放多座仿自然生态浮岛，种植本土水生植物，为鱼类产卵、水鸟栖息提供天然庇护所。浮岛采用可降解环保材料，形成"会呼吸的湖心花园"。',
+    icon: '🌿', tag: '项目二', title: '鸽子棚',
+    img:'images/2.jpg',
+    desc: '针对思源湖畔鸽子遮阳避雨的实际需求，本设计在原有鸽子屋上方增设了一座鸽子棚。整体造型上，屋顶采用扭转的独特形态，顺势呼应原有鸽舍的高度变化，呈现出叶片悬停于屋顶之上的灵动意象。从俯视角度看，棚顶宛如两片半叶并置，中央斜置的木构架则模拟叶脉的走向，强化自然生长的视觉感受。围护部分，大部分格面选用牛津布，局部嵌入透明透光材质，兼顾采光与防雨功能；棚下配置的横木，为鸽群提供了适宜停栖与休憩的空间。',
     bg: 'linear-gradient(135deg,#1b5e20,#2e7d32,#388e3c)', msgBtn: false
   },
   3: {
-    icon: '🏛️', tag: '项目三', title: '记忆廊道',
+    icon: '🏛️', tag: '项目三', title: '131座椅',
     img:'images/3.jpg',
-    desc: '沿环湖步道设置"思源湖记忆廊道"，通过铭刻于地面和廊柱的历史影像与文字，串联1986年至今的关键时刻，让每一步行走都成为穿越40年的时光旅途。',
+    desc: '其核心形态源于数字“131”，从正面、背面及半侧面均能清晰识别，结合镜面局部反射与木质倚坐功能，在思源湖畔形成一个既可识别、又可停留的校庆场所节点。它不仅是一个被观看的符号，也是一个可以坐下、放松、与思源湖产生连接的场所。',
     bg: 'linear-gradient(135deg,#4a148c,#6a1b9a,#7b1fa2)', msgBtn: false
   },
   4: {
@@ -1204,15 +1205,15 @@ const projects = {
     bg: 'linear-gradient(135deg,#1a237e,#283593,#3949ab)', msgBtn: false
   },
   5: {
-    icon: '🎨', tag: '项目五', title: '共绘思源墙',
+    icon: '🎨', tag: '项目五', title: '思源回声',
     img:'images/5.jpg',
-    desc: '在思源湖南岸设立"共绘思源墙"，每位同学均可在墙上留下自己的创作——绘画、诗句或祝福。40周年之际，这堵墙将成为全体交大人共同的艺术作品与集体记忆。',
+    desc: '方案以三棵柳树为依托，通过悬挂圆形装置，形成呼应湖心雕塑起伏的“回声波”，同时祝福交大校庆。其中五个水墨屏承担扫码入口、关键词、留言、回应与投影提示功能，其余半透明亚克力圆片则像柳条般垂落，在湖光与树影之间形成轻盈的情绪界面。白天，路过的人可以在柳树下阅读圆片上的匿名文字，扫码留下自己的思源片刻；夜晚，部分回声会被转译为湖面投影，重新浮现在水面上。装置希望把思源湖从日常经过的风景，转化为一个可以停留、表达、回应和共同记住的校园公共空间。',
     bg: 'linear-gradient(135deg,#880e4f,#ad1457,#c2185b)', msgBtn: true
   },
   6: {
-    icon: '🦋', tag: '项目六', title: '湿地科普园',
+    icon: '🦋', tag: '项目六', title: '月亮椅',
     img:'images/6.jpg', 
-    desc: '在思源湖东岸开辟湿地科普体验园，还原湿地生态系统，设置互动科普展牌、观鸟亭和自然教育径，为学生提供身临其境的自然教育场所，让生态文明教育落地生根。',
+    desc: '热敏材质椅子设计，感受到热量传递后就会变色，意在表达交大人与交大“千里共婵娟”之意。',
     bg: 'linear-gradient(135deg,#004d40,#00695c,#00796b)', msgBtn: false
   }
 };
